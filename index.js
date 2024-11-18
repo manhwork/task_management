@@ -11,20 +11,11 @@ const database = require("./configs/database");
 database.connect();
 // End Config database
 
-const Task = require("./models/task.model");
-
-app.get("/tasks", async (req, res) => {
-    try {
-        const task = await Task.find({
-            deleted: false,
-        });
-
-        res.json(task);
-    } catch (error) {
-        res.json("Not fould!");
-    }
-});
+// Config routes 1
+const routeApiVer1 = require("./api/v1/routes/index.route");
+routeApiVer1(app);
+// end Config routes 1
 
 app.listen(port, () => {
-    console.log("App is running at http://localhost:3000");
+    console.log(`App is running at http://localhost:${port}`);
 });
